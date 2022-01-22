@@ -4,3 +4,4 @@ seed = 100
 amount = 100
 
 data = generate_data(seed, amount)
+print(data)
