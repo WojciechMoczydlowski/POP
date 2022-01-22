@@ -1,10 +1,8 @@
 import math
-
 import pytest
 
-from src.evolutionary_algorithm.evolutionary_algorithm import check_if_configuration_of_children_with_cookies_is_valid, \
-    calculate_cost
-from src.utils.child import Child
+from src.utils.cost_function import calculate_cost
+from src.utils.models import Child
 
 
 @pytest.mark.parametrize(
@@ -16,7 +14,7 @@ from src.utils.child import Child
         ([Child(4, 2), Child(4, 2), Child(3, 0)], True),
     ])
 def test_check_if_configuration_of_children_with_cookies_is_valid(children, result):
-    assert check_if_configuration_of_children_with_cookies_is_valid(children) == result
+    assert test_check_if_configuration_of_children_with_cookies_is_valid(children) == result
 
 
 @pytest.mark.parametrize(
