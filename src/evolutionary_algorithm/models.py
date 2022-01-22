@@ -14,6 +14,7 @@ class MutationType(Enum):
 
 @dataclass
 class EvolutionaryAlgorithmParameters:
+    generations: int = 50
     population_number: int = 50
     crossover_probability: float = 0.2
     mutation_probability: float = 0.2
