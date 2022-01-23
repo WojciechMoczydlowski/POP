@@ -1,5 +1,5 @@
 import random
-from src.utils.child import Child
+from src.utils.models import Child
 min_mark = 1
 max_mark = 100
 
