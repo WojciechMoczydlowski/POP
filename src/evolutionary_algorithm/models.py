@@ -1,5 +1,10 @@
 from dataclasses import dataclass
 from enum import Enum, auto
+from typing import List
+
+from src.utils.models import Children
+
+Population = List[Children]
 
 
 class SelectionType(Enum):
