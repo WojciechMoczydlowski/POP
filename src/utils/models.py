@@ -15,5 +15,8 @@ class Child:
     def __repr__(self):
         return f"Child with m:{self.mark} and c:{self.cookies}"
 
+    def __eq__(self, other):
+        return self.mark == other.mark and self.cookies == other.mark
+
 
 Children = List[Child]
