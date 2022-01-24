@@ -1,11 +1,8 @@
 import random
 from src.utils.models import Child
-min_mark = 1
-max_mark = 100
 
 
-def generate_data(seed, amount):
-    random.seed(seed)
+def generate_data(amount, min_mark, max_mark):
     children = []
 
     for i in range(amount):

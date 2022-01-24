@@ -2,6 +2,7 @@ from typing import List, Tuple
 import math
 from src.evolutionary_algorithm.models import EvolutionaryAlgorithmParameters
 from src.utils.models import Child
+from src.utils.cost_function import calculate_cost
 
 
 def solve_with_evolutionary_algorithm(

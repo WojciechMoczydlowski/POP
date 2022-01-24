@@ -1,11 +1,11 @@
-from src.evolutionary_algorithm.evolutionary_algorithm import solve_with_evolutionary_algorithm
-from src.evolutionary_algorithm.models import EvolutionaryAlgorithmParameters
-from src.generator.generate_date import generate_data
-from src.greedy_algorithm.greedy_algorithm import greedy_algorithm
+import random
 
-seed = 150
-amount = 10
+from src.compare_algorithms.compare_algorithms import compare_algorithms
 
-data = generate_data(seed, amount)
-print(solve_with_evolutionary_algorithm(data, EvolutionaryAlgorithmParameters()))
-results = greedy_algorithm(data, 1000)
+seed = 100
+random.seed(seed)
+
+results_1 = compare_algorithms(1000, 1, 5)
+results_2 = compare_algorithms(1000, 1, 1000)
+results_3 = compare_algorithms(100000, 1, 5)
+results_4 = compare_algorithms(100000, 1, 1000)
