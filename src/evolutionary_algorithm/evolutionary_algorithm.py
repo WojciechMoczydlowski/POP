@@ -1,7 +1,6 @@
 from copy import deepcopy
 from random import sample, randint, randrange
 from typing import Tuple
-from tqdm import trange
 import numpy as np
 
 from src.evolutionary_algorithm.models import EvolutionaryAlgorithmParameters, Children, Population, SelectionType, \
@@ -16,7 +15,7 @@ class SolveWithEvolutionaryAlgorithm:
 
     def evaluate_algorithm(self) -> Tuple[Children, float]:
         population = [deepcopy(self.children) for _ in range(self.parameters.population_number)]
-        for _ in trange(self.parameters.generations):
+        for _ in range(self.parameters.generations):
             population = self.evaluate_generation(population)
 
         best = self.select_the_fittest(population, 1)[0]
@@ -79,7 +78,6 @@ class SolveWithEvolutionaryAlgorithm:
 
     @staticmethod
     def roulette_wheel_selection(population: Population):
-        print(population)
         population_fitness = sum([calculate_cost(chromosome) for chromosome in population])
         chromosome_probabilities = [calculate_cost(chromosome) / population_fitness for chromosome in population]
 
