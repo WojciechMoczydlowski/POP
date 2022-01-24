@@ -1,7 +1,7 @@
 import math
 import pytest
 
-from src.utils.cost_function import calculate_cost
+from src.utils.cost_function import calculate_cost, check_if_configuration_of_children_with_cookies_is_valid
 from src.utils.models import Child
 
 
@@ -12,9 +12,11 @@ from src.utils.models import Child
         ([Child(5, 1), Child(4, 2), Child(3, 1)], False),
         ([Child(3, 1), Child(4, 2), Child(3, 0)], True),
         ([Child(4, 2), Child(4, 2), Child(3, 0)], True),
+        ([Child(4, 2), Child(3, 2), Child(2, 2)], False),
+        ([Child(19, 1), Child(59, 1), Child(59, 1)], False),
     ])
 def test_check_if_configuration_of_children_with_cookies_is_valid(children, result):
-    assert test_check_if_configuration_of_children_with_cookies_is_valid(children) == result
+    assert check_if_configuration_of_children_with_cookies_is_valid(children) == result
 
 
 @pytest.mark.parametrize(
