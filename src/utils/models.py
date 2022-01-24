@@ -29,10 +29,12 @@ class Child:
         return f"m:{self.mark} c:{self.cookies}"
 
     def __eq__(self, other):
-        return self.mark == other.mark and self.cookies == other.mark
+        return self.mark == other.mark and self.cookies == other.cookies
 
     def set_cookies(self, cookies):
         self.cookies = cookies
 
 
 Children = List[Child]
+
+Child(1, 2) == Child(1, 2)
