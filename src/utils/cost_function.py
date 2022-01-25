@@ -1,11 +1,13 @@
+import math
+
 from src.utils.models import Children, Child
 
 
 def calculate_cost(children: Children) -> float:
     if not check_if_configuration_of_children_with_cookies_is_valid(children):
-        return 1000000000.0
+        return math.inf
 
-    return sum([child.cookies for child in children])
+    return float(sum([child.cookies for child in children]))
 
 
 def check_if_configuration_of_children_with_cookies_is_valid(children: Children) -> bool:
