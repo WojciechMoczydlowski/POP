@@ -9,22 +9,23 @@ from src.generator.generate_date import generate_data
 from src.greedy_algorithm.greedy_algorithm import greedy_algorithm
 import jsonlines
 
+from src.utils.cost_function import calculate_cost
 
-def save_cookies_numer_and_parameters(cookies: float, parameters: EvolutionaryAlgorithmParameters,
-                                      greedy_algorithm_cookies: float):
+
+def save_cookies_numer_and_parameters(init_cookies, final_cookies: float, parameters: EvolutionaryAlgorithmParameters):
     with jsonlines.open('output.jsonl', mode='a') as writer:
         writer.write({
-            'cookies': cookies,
-            'parameters': asdict(parameters),
-            'greedy_algorithm_cookies': greedy_algorithm_cookies
+            'init_cookies': init_cookies,
+            'final_cookies': final_cookies,
+            'parameters': asdict(parameters)
         })
 
 
 def main():
     amount = 30
-    for i1, seed in enumerate([0, 1, 2]):
-        data = generate_data(seed, amount)
-        for i2, generations in enumerate([50, 100, 200]):
+    for i2, generations in enumerate([50, 100, 200, 500, 1000, 5000]):
+        for i1, seed in enumerate([0, 1, 2]):
+            data = generate_data(amount, 1, 100)
             for i3, population_number in enumerate([50, 100, 200]):
                 for i4, crossover_probability in enumerate([0, 0.1, 0.3]):
                     for i5, selection_type in enumerate([SelectionType.TOURNAMENT, SelectionType.ROULETTE]):
@@ -37,9 +38,8 @@ def main():
                                 selection_type=selection_type,
                                 mutation_type=mutation_type
                             )
-                            # _, total_cookies = SolveWithEvolutionaryAlgorithm(deepcopy(data), parameters).evaluate_algorithm()
-                            _, greedy_algorithm_cookies = greedy_algorithm(deepcopy(data), 1000)
-                            save_cookies_numer_and_parameters(1, parameters, greedy_algorithm_cookies)
+                            _, total_cookies = SolveWithEvolutionaryAlgorithm(deepcopy(data), parameters).evaluate_algorithm()
+                            save_cookies_numer_and_parameters(calculate_cost(data), total_cookies, parameters)
                             print(i1, i2, i3, i4, i5, i6)
 
 
