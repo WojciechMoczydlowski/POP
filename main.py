@@ -1,12 +1,10 @@
+import random
 from copy import deepcopy
 from dataclasses import asdict
-
-from tqdm import tqdm
 
 from src.evolutionary_algorithm.evolutionary_algorithm import SolveWithEvolutionaryAlgorithm
 from src.evolutionary_algorithm.models import EvolutionaryAlgorithmParameters, SelectionType, MutationType
 from src.generator.generate_date import generate_data
-from src.greedy_algorithm.greedy_algorithm import greedy_algorithm
 import jsonlines
 
 from src.utils.cost_function import calculate_cost
@@ -25,6 +23,7 @@ def main():
     amount = 30
     for i2, generations in enumerate([50, 100, 200, 500, 1000, 5000]):
         for i1, seed in enumerate([0, 1, 2]):
+            random.seed(seed)
             data = generate_data(amount, 1, 100)
             for i3, population_number in enumerate([50, 100, 200]):
                 for i4, crossover_probability in enumerate([0, 0.1, 0.3]):
