@@ -1,6 +1,5 @@
-from copy import deepcopy
-from random import sample, randint, randrange
-from typing import Tuple
+from random import sample, randrange
+from typing import Tuple, List
 import numpy as np
 
 from src.evolutionary_algorithm.models import EvolutionaryAlgorithmParameters, Children, Population, SelectionType, \
@@ -14,7 +13,7 @@ class SolveWithEvolutionaryAlgorithm:
         self.parameters = parameters
 
     def evaluate_algorithm(self) -> Tuple[Children, float]:
-        population = [deepcopy(self.children) for _ in range(self.parameters.population_number)]
+        population = [self.children[:] for _ in range(self.parameters.population_number)]
         for _ in range(self.parameters.generations):
             population = self.evaluate_generation(population)
 
@@ -22,7 +21,7 @@ class SolveWithEvolutionaryAlgorithm:
         return best, calculate_cost(best)
 
     def evaluate_generation(self, population: Population):
-        children = self.breed(deepcopy(population))
+        children = self.breed(copy_list_of_list(population))
         return self.select_the_fittest(population + children, self.parameters.population_number)
 
     def breed(
@@ -61,7 +60,7 @@ class SolveWithEvolutionaryAlgorithm:
 
         if self.parameters.mutation_type == MutationType.TAKE_RANDOM_NUMBER_OF_CAKES_RANDOM_CHILD:
             max_cookies = max([child.cookies for child in children])
-            n = randrange(0, max_cookies+1)
+            n = randrange(0, max_cookies + 1)
             children[random_index] = children[random_index].take_cookies_immutable(n)
         else:
             children[random_index] = children[random_index].take_cookie_immutable()
@@ -103,6 +102,10 @@ class SolveWithEvolutionaryAlgorithm:
         results = sorted(results, key=lambda x: x[1])
         new_population = [individual for (individual, cost) in results]
         return new_population[0:select_number]
+
+
+def copy_list_of_list(list_to_copy: List[Children]):
+    return [inner_list[:] for inner_list in list_to_copy]
 
 
 def list_splitter(list_to_split, ratio):
