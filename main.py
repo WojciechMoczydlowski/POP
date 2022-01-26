@@ -11,7 +11,7 @@ from src.utils.cost_function import calculate_cost
 
 
 def save_cookies_numer_and_parameters(init_cookies, final_cookies: float, parameters: EvolutionaryAlgorithmParameters):
-    with jsonlines.open('output.jsonl', mode='a') as writer:
+    with jsonlines.open('output1.jsonl', mode='a') as writer:
         writer.write({
             'init_cookies': init_cookies,
             'final_cookies': final_cookies,
@@ -21,15 +21,15 @@ def save_cookies_numer_and_parameters(init_cookies, final_cookies: float, parame
 
 def main():
     amount = 30
-    for i2, generations in enumerate([50, 100, 200, 500, 1000, 5000]):
-        for i1, seed in enumerate([0, 1, 2]):
+    for i1, generations in enumerate([100, 500, 1000]):
+        for i2, seed in enumerate([0, 1, 2]):
             random.seed(seed)
             data = generate_data(amount, 1, 100)
-            for i3, population_number in enumerate([50, 100, 200]):
-                for i4, crossover_probability in enumerate([0, 0.1, 0.3]):
+            print(calculate_cost(data))
+            for i3, population_number in enumerate([100]):
+                for i4, crossover_probability in enumerate([0.3, 0.5, 1]):
                     for i5, selection_type in enumerate([SelectionType.TOURNAMENT, SelectionType.ROULETTE]):
-                        for i6, mutation_type in enumerate([MutationType.TAKE_1_CAKE_FROM_RANDOM_CHILD,
-                                                            MutationType.TAKE_RANDOM_NUMBER_OF_CAKES_RANDOM_CHILD]):
+                        for i6, mutation_type in enumerate([MutationType.TAKE_RANDOM_NUMBER_OF_CAKES_RANDOM_CHILD]):
                             parameters = EvolutionaryAlgorithmParameters(
                                 population_number=population_number,
                                 generations=generations,

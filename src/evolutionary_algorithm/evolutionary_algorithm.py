@@ -62,9 +62,9 @@ class SolveWithEvolutionaryAlgorithm:
             return chromosome
 
         if self.parameters.mutation_type == MutationType.TAKE_RANDOM_NUMBER_OF_CAKES_RANDOM_CHILD:
-            max_cookies = max([child.cookies for child in chromosome])
-            n = randrange(0, max_cookies + 1)
-            chromosome[random_index] = chromosome[random_index].take_cookies_immutable(n)
+            child = chromosome[random_index]
+            n = randrange(0, child.cookies)
+            chromosome[random_index] = child.take_cookies_immutable(n)
         else:
             chromosome[random_index] = chromosome[random_index].take_cookie_immutable()
         return chromosome
