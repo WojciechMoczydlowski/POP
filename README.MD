@@ -1,4 +1,4 @@
-from src.evolutionary_algorithm.models import MutationType# POP - Evolutionary algorithm for kids with cookies problem
+# POP - Evolutionary algorithm for kids with cookies problem
 
 We had to solve the problem:
 
