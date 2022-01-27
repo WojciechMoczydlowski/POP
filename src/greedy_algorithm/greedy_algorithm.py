@@ -2,14 +2,13 @@ import random
 
 from typing import List
 
-from src.utils.cost_function import calculate_cost
 from src.utils.models import Child
 
 
 def greedy_algorithm(children: List[Child], iterations: int):
-    random.seed(None)
 
     children_amount = len(children)
+
     for i in range(iterations):
         child_index = random.randrange(0, children_amount)
 
@@ -24,8 +23,8 @@ def greedy_algorithm(children: List[Child], iterations: int):
             child.set_cookies(count_cookies_for_two_children(child, prev_child))
         else:
             child.set_cookies(count_cookies_for_three_children(child, prev_child, next_child))
-    return children, calculate_cost(children)
 
+    return children
 
 
 def count_cookies_for_two_children(child, second_child):
@@ -41,7 +40,7 @@ def count_cookies_for_three_children(child, prev_child, next_child):
     if child.mark < prev_child.mark and child.mark < next_child.mark:
         return 1
     elif child.mark > prev_child.mark and child.mark > next_child.mark:
-        return max(prev_child.cookies, next_child.cookies)
+        return max(prev_child.cookies, next_child.cookies) + 1
     else:
         if prev_child.mark == child.mark:
             return prev_child.cookies
